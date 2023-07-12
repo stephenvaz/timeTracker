@@ -1,6 +1,6 @@
 # Running Server (GO)
 
-## Installation Steps (if GO isn't installed)
+## 0. Installation Steps (if GO isn't installed)
 
 Follow the steps below to install Go:
 1. Visit the official Go website at [https://golang.org/dl/](https://golang.org/dl/).
@@ -10,7 +10,7 @@ Follow the steps below to install Go:
    >`go version`
    >>If Go is installed correctly, it will display the installed Go version.
 
-## Running the server
+## 1. Running the server
 1. Ensure you're in the /server directory.
    >You can do this by running the following command:
     >> `cd server`
@@ -21,6 +21,12 @@ Follow the steps below to install Go:
 4. Run the following command to start the server:
    >`go run main.go`
 
-
+## Alternatively, for live reloading in GO (nodemon-like)
+1. Visit the official Air repository at [https://github.com/cosmtrek/air](https://github.com/cosmtrek/air).
+2. Follow the instructions to install the air package
+3. Verify the installation with the command:
+   > `air -v`
+4. To start live-reloading, in the /server directory, run the command:
+   > `air`
 
 
