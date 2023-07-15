@@ -1,0 +1,20 @@
+.node__root > circle {
+    fill: red;
+  }
+  
+  .node__branch > circle {
+    fill: rgb(0, 255, 64);
+  }
+  
+  .node__leaf > circle {
+    fill: rgb(115, 128, 0);
+    /* Let's also make the radius of leaf nodes larger */
+    /* r: 40; */
+  }
+
+
+.custom {
+    justify-self: center;
+    align-self: center;
+    align-items: center;
+}
