@@ -209,14 +209,18 @@ function App() {
     };
 
     const handleSelectNode = (keys) => {
+        console.log(keys)
         const nodeId = keys[0];
+        console.log(data)
         const selectedNode = findNodeById(data, nodeId);
+        console.log(nodeId)
+        console.log(selectedNode)
         setSelectedNode(selectedNode);
     };
 
     const findNodeById = (treeData, nodeId) => {
         for (let node of treeData) {
-            if (node.id === nodeId) {
+            if (node.id == nodeId) {
                 return node;
             } else if (node.children) {
                 const foundNode = findNodeById(node.children, nodeId);
