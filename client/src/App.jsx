@@ -39,99 +39,10 @@ function App() {
             console.log(res.data.data);
             const empData = res.data.data;
 
-//        empData=      [
-//     {
-//         "HierarchyID": 1,
-//         "EmployeeID": 3,
-//         "SupervisorID": 1,
-//         "Ename": "Stephen",
-//         "Sname": "Darsh"
-//     },
-//     {
-//         "HierarchyID": 2,
-//         "EmployeeID": 2,
-//         "SupervisorID": 1,
-//         "Ename": "Siddhesh",
-//         "Sname": "Darsh"
-//     },
-//     {
-//         "HierarchyID": 3,
-//         "EmployeeID": 5,>
-//         "SupervisorID": 2,
-//         "Ename": "t1",
-//         "Sname": "Siddhesh"
-//     },
-//     {
-//         "HierarchyID": 4,
-//         "EmployeeID": 6,
-//         "SupervisorID": 2,
-//         "Ename": "t2",
-//         "Sname": "Siddhesh"
-//     },
-//     {
-//         "Hiera [
-//     {
-//         "HierarchyID": 1,
-//         "EmployeeID": 3,
-//         "SupervisorID": 1,
-//         "Ename": "Stephen",
-//         "Sname": "Darsh"
-//     },
-//     {
-//         "HierarchyID": 2,
-//         "EmployeeID": 2,
-//         "SupervisorID": 1,
-//         "Ename": "Siddhesh",
-//         "Sname": "Darsh"
-//     },
-//     {
-//         "HierarchyID": 3,
-//         "EmployeeID": 5,
-//         "SupervisorID": 2,
-//         "Ename": "t1",
-//         "Sname": "Siddhesh"
-//     },
-//     {
-//         "HierarchyID": 4,
-//         "EmployeeID": 6,
-//         "SupervisorID": 2,
-//         "Ename": "t2",
-//         "Sname": "Siddhesh"
-//     },
-//     {
-//         "HierarchyID": 5,
-//         "EmployeeID": 7,
-//         "SupervisorID": 3,
-//         "Ename": "t3",
-//         "Sname": "Stephen"
-//     },
-//     {
-//         "HierarchyID": 6,
-//         "EmployeeID": 1,
-//         "SupervisorID": 1,
-//         "Ename": "Darsh",
-//         "Sname": "Darsh"
-//     }
-// ]rchyID": 5,
-//         "EmployeeID": 7,
-//         "SupervisorID": 3,
-//         "Ename": "t3",
-//         "Sname": "Stephen"
-//     },
-//     {
-//         "HierarchyID": 6,
-//         "EmployeeID": 1,
-//         "SupervisorID": 1,
-//         "Ename": "Darsh",
-//         "Sname": "Darsh"
-//     }
-// ]
-            // the employee, who has employee id === supervisor id, is the root node
-            
-
             empData.forEach((emp) => {
                 if (emp.EmployeeID === emp.SupervisorID) {
                     initialData.push({
+                        hid: emp.HierarchyID,
                         id: emp.EmployeeID,
                         title: emp.Ename,
                         children: [],
@@ -144,6 +55,7 @@ function App() {
                     const supervisorNode = findNodeById(initialData, emp.SupervisorID);
                     if (supervisorNode) {
                         supervisorNode.children.push({
+                            hid: emp.HierarchyID,
                             id: emp.EmployeeID,
                             title: emp.Ename,
                             children: [],
