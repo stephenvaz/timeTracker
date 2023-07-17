@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Tree, Button, Modal, Input, Select } from 'antd';
 // import 'antd/dist/antd.css';
+import axios from 'axios';
 import './App.css';
 
 const { TreeNode } = Tree;
@@ -21,6 +22,18 @@ function App() {
     const [addModalVisible, setAddModalVisible] = useState(false);
     const [newNodeTitle, setNewNodeTitle] = useState('');
     const [selectedTargetNode, setSelectedTargetNode] = useState(null);
+
+    useEffect(() => {
+        axios
+          .get('http://127.0.0.1:6969/api/hierarchy/getall')
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+    
+      }, []);
 
     const handleDeleteModal = () => {
         setDeleteModalVisible(!deleteModalVisible);
@@ -223,7 +236,7 @@ function App() {
             )}
             <Modal
                 title="Confirm Delete"
-                visible={deleteModalVisible}
+                open={deleteModalVisible}
                 onOk={handleDeleteNode}
                 onCancel={handleDeleteModal}
             >
@@ -236,7 +249,7 @@ function App() {
             </div>
             <Modal
                 title="Add Node"
-                visible={addModalVisible}
+                open={addModalVisible}
                 onOk={handleAddNode}
                 onCancel={handleAddModal}
             >
