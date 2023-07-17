@@ -8,15 +8,15 @@ const { TreeNode } = Tree;
 const { Option } = Select;
 
 const initialData = [
-    {
-        id: 'admin',
-        title: 'Admin',
-        children: [],
-    },
+    // {
+    //     id: 'admin',
+    //     title: 'Admin',
+    //     children: [],
+    // },
 ];
 
 function App() {
-    const [data, setData] = useState(initialData);
+    const [data, setData] = useState([]);
     const [selectedNode, setSelectedNode] = useState(null);
     const [deleteModalVisible, setDeleteModalVisible] = useState(false);
     const [addModalVisible, setAddModalVisible] = useState(false);
@@ -27,7 +27,122 @@ function App() {
         axios
           .get('http://127.0.0.1:6969/api/hierarchy/getall')
           .then((res) => {
-            console.log(res.data);
+            console.log(res.data.data);
+            const empData = res.data.data;
+
+//        empData=      [
+//     {
+//         "HierarchyID": 1,
+//         "EmployeeID": 3,
+//         "SupervisorID": 1,
+//         "Ename": "Stephen",
+//         "Sname": "Darsh"
+//     },
+//     {
+//         "HierarchyID": 2,
+//         "EmployeeID": 2,
+//         "SupervisorID": 1,
+//         "Ename": "Siddhesh",
+//         "Sname": "Darsh"
+//     },
+//     {
+//         "HierarchyID": 3,
+//         "EmployeeID": 5,>
+//         "SupervisorID": 2,
+//         "Ename": "t1",
+//         "Sname": "Siddhesh"
+//     },
+//     {
+//         "HierarchyID": 4,
+//         "EmployeeID": 6,
+//         "SupervisorID": 2,
+//         "Ename": "t2",
+//         "Sname": "Siddhesh"
+//     },
+//     {
+//         "Hiera [
+//     {
+//         "HierarchyID": 1,
+//         "EmployeeID": 3,
+//         "SupervisorID": 1,
+//         "Ename": "Stephen",
+//         "Sname": "Darsh"
+//     },
+//     {
+//         "HierarchyID": 2,
+//         "EmployeeID": 2,
+//         "SupervisorID": 1,
+//         "Ename": "Siddhesh",
+//         "Sname": "Darsh"
+//     },
+//     {
+//         "HierarchyID": 3,
+//         "EmployeeID": 5,
+//         "SupervisorID": 2,
+//         "Ename": "t1",
+//         "Sname": "Siddhesh"
+//     },
+//     {
+//         "HierarchyID": 4,
+//         "EmployeeID": 6,
+//         "SupervisorID": 2,
+//         "Ename": "t2",
+//         "Sname": "Siddhesh"
+//     },
+//     {
+//         "HierarchyID": 5,
+//         "EmployeeID": 7,
+//         "SupervisorID": 3,
+//         "Ename": "t3",
+//         "Sname": "Stephen"
+//     },
+//     {
+//         "HierarchyID": 6,
+//         "EmployeeID": 1,
+//         "SupervisorID": 1,
+//         "Ename": "Darsh",
+//         "Sname": "Darsh"
+//     }
+// ]rchyID": 5,
+//         "EmployeeID": 7,
+//         "SupervisorID": 3,
+//         "Ename": "t3",
+//         "Sname": "Stephen"
+//     },
+//     {
+//         "HierarchyID": 6,
+//         "EmployeeID": 1,
+//         "SupervisorID": 1,
+//         "Ename": "Darsh",
+//         "Sname": "Darsh"
+//     }
+// ]
+            // the employee, who has employee id === supervisor id, is the root node
+            
+
+            empData.forEach((emp) => {
+                if (emp.EmployeeID === emp.SupervisorID) {
+                    initialData.push({
+                        id: emp.EmployeeID,
+                        title: emp.Ename,
+                        children: [],
+                    });
+                }
+            });
+            // NOW i need to add the children to the root node
+            empData.forEach((emp) => {
+                if (emp.EmployeeID !== emp.SupervisorID) {
+                    const supervisorNode = findNodeById(initialData, emp.SupervisorID);
+                    if (supervisorNode) {
+                        supervisorNode.children.push({
+                            id: emp.EmployeeID,
+                            title: emp.Ename,
+                            children: [],
+                        });
+                    }
+                }
+            });
+            setData(initialData);
           })
           .catch((err) => {
             console.log(err);
