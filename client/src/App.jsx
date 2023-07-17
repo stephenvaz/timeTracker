@@ -8,32 +8,57 @@ const { TreeNode } = Tree;
 const { Option } = Select;
 
 const initialData = [
-    {
-        id: 'admin',
-        title: 'Admin',
-        children: [],
-    },
+    // {
+    //     // id: 'admin',
+    //     // title: 'Admin',
+    //     // children: [],
+    // },
 ];
 
 function App() {
-    const [data, setData] = useState(initialData);
+    const [data, setData] = useState([]);
     const [selectedNode, setSelectedNode] = useState(null);
     const [deleteModalVisible, setDeleteModalVisible] = useState(false);
     const [addModalVisible, setAddModalVisible] = useState(false);
     const [newNodeTitle, setNewNodeTitle] = useState('');
     const [selectedTargetNode, setSelectedTargetNode] = useState(null);
 
+    // {
+    //     "HierarchyID": 1,
+    //     "EmployeeID": 3,
+    //     "SupervisorID": 1,
+    //     "Ename": "Stephen",
+    //     "Sname": "Darsh"
+    // }
+
     useEffect(() => {
-        axios
+        const getData = async () => {
+        await axios
           .get('http://127.0.0.1:6969/api/hierarchy/getall')
           .then((res) => {
-            console.log(res.data);
+            console.log(res.data.data);
+            const empData = res.data.data;
+            empData.map((emp) => {
+                if(emp.EmployeeID === emp.SupervisorID) {
+                    initialData.push({
+                        id: emp.EmployeeID,
+                        title: emp.Ename,
+                        children: [],
+                    })
+                }
+            })
           })
           .catch((err) => {
             console.log(err);
           });
+        }
+        getData();
     
       }, []);
+
+      useEffect(() => {
+        console.log(data)
+        }, [data]);
 
     const handleDeleteModal = () => {
         setDeleteModalVisible(!deleteModalVisible);
@@ -229,9 +254,9 @@ function App() {
             </div>
             {selectedNode && (
                 <div className="actions">
-                    <Button type="danger" onClick={handleDeleteModal} style={{ marginRight: '10px' }}>
+                    <button className='btn btn-danger' onClick={handleDeleteModal} style={{ marginRight: '10px' }}>
                         Delete Node
-                    </Button>
+                    </button>
                 </div>
             )}
             <Modal
@@ -243,9 +268,9 @@ function App() {
                 <p>Are you sure you want to delete this node?</p>
             </Modal>
             <div className="actions">
-                <Button type="primary" onClick={handleAddModal}>
+                <button className='btn btn-primary' onClick={handleAddModal}>
                     Add Node
-                </Button>
+                </button>
             </div>
             <Modal
                 title="Add Node"
