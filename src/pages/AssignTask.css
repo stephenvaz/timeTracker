@@ -1,0 +1,118 @@
+/* Styling for the form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  .form-group label {
+    min-width: 150px; /* Updated width for labels */
+    text-align: right;
+    margin-right: 20px;
+  }
+  
+  .form-group input[type='text'],
+  .form-group textarea,
+  .form-group select { /* Added select input type for consistent sizing */
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+  }
+  
+  .form-group textarea {
+    resize: vertical;
+  }
+  
+  .form-group input[type='text']:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { /* Added select input type for consistent styling */
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  /* Styling for the "Assign Task" button */
+  button[type='submit'] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button[type='submit']:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Styling for the assigned tasks list */
+  .assigned-tasks {
+    margin-top: 20px;
+  }
+  
+  .assigned-tasks h3 {
+    margin-bottom: 10px;
+  }
+  
+  .assigned-tasks ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .assigned-tasks li {
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f8f8f8;
+  }
+  
+  /* Animations and Beautifications */
+  
+  /* Animation for form elements on hover and focus */
+  .form-group label,
+  .form-group input[type='text'],
+  .form-group textarea,
+  .form-group select { /* Added select input type for consistent styling */
+    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+  }
+  
+  .form-group label:hover,
+  .form-group input[type='text']:hover,
+  .form-group textarea:hover,
+  .form-group select:hover { /* Added select input type for consistent styling */
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .form-group label:focus-within,
+  .form-group input[type='text']:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { /* Added select input type for consistent styling */
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  /* Beautification for the assigned tasks list */
+  .assigned-tasks li {
+    background-color: #f8f8f8;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .assigned-tasks li:hover {
+    background-color: #f2f2f2;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+  }
+  

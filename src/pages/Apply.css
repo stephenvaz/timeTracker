@@ -1,0 +1,70 @@
+/* Apply.css */
+
+.apply-page {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  .apply-page h2 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .ant-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .ant-radio-button-wrapper {
+    margin-bottom: 10px;
+  }
+  
+  .ant-picker {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .ant-input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .ant-upload {
+    width: 100%;
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .ant-upload-drag-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  
+  .ant-upload-text,
+  .ant-upload-hint {
+    color: #888;
+  }
+  
+  .ant-upload-list-item-name {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  .ant-upload-list-item-card-actions {
+    display: none;
+  }
+  
+  .ant-btn-primary {
+    width: 100%;
+  }
+  
+  /* Add any additional custom styles as needed */
+  

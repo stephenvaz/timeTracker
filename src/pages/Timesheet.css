@@ -1,0 +1,102 @@
+/* ... (previously defined styles remain the same) */
+
+/* Additional styles for the table */
+.attendance-data,
+.task-data {
+  margin-top: 20px;
+}
+
+.attendance-data h3,
+.task-data h3 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.attendance-data ul,
+.task-data ul {
+  list-style: none;
+  padding: 0;
+}
+
+.attendance-data li,
+.task-data li {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 10px; /* Increased border radius for a softer look */
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative; /* Add relative positioning */
+}
+
+.attendance-data li::before,
+.task-data li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+
+.attendance-data li:hover::before,
+.task-data li:hover::before {
+  transform: scaleX(1);
+}
+
+/* Remove the animation for the last item */
+.attendance-data li:last-child::before,
+.task-data li:last-child::before {
+  content: none;
+}
+
+/* Additional styles for the task data table */
+.task-data table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.task-data th,
+.task-data td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #000000;
+}
+
+.task-data th {
+  background-color: #78c6f0;
+}
+
+.task-data input[type='text'],
+.task-data input[type='number'] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ca3c3c;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.task-data button {
+  padding: 8px 16px;
+  background-color: #f5222d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.task-data button:hover {
+  background-color: #d91c27;
+}
+
+.task-data input[type='text']:focus,
+.task-data input[type='number']:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
