@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { motion } from 'framer-motion'
-import './Login.css'
 import { useState } from 'react';
-import Note from './Note';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import './Login.css'
 
-const Login = () => {
+const Login = ({setIsAuth}) => {
   const [userDetails, setUserDetails] = useState({
     email: "",
     password: ""
@@ -18,14 +16,24 @@ const Login = () => {
   }
 
   const [loginStat, setLoginStat] = useState(false)
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        toast("Login Successful!" , {
-          toastId: "success"        
-      })
+        console.log(userDetails);
+        await axios.post("http://localhost:6969/api/users/login", userDetails)
+        .then((res) => {
+          console.log(res.data);
+          localStorage.setItem("isAuth", 'true');
+          window.location.href = "/home";
+          // localStorage.setItem("isIn", 'true');
+          // localStorage.setItem("user", res.data);
+          // console.log(res.data.token);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        toast.success("Login Successful!")
       
     } catch (error) {
       setLoginStat(false);
@@ -55,13 +63,7 @@ const Login = () => {
   }
   
   return (
-    <div>
-
-      <motion.div className="loginBox"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        // transition={{delay: 0, duration: 1}}
-        exit={{ opacity: 0 }}>
+    <div className="loginBox">
           <h2>Login</h2>
           <form>
             <div className="userBox">
@@ -85,9 +87,7 @@ const Login = () => {
               <span></span>
               Submit
             </a>
-            <Note loginStat={loginStat}/>
           </form>
-        </motion.div>
     </div>
       )
 }

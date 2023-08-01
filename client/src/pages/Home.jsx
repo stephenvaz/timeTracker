@@ -16,7 +16,8 @@ const Home = () => {
   const handleLogout = () => {
     // Implement your logout logic here
     console.log("User logged out.");
-
+    localStorage.clear()
+    window.location.reload()
     // Reset attendance data
     setIsArrivalStarted(false);
     setIsArrivalEnded(false);
