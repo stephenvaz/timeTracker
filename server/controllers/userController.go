@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"log"
+	"os"
 	"net/http"
 	"golang.org/x/crypto/bcrypt"
 
@@ -9,11 +10,10 @@ import (
 	"github.com/stephen/models"
 	"github.com/stephen/storage"
 	"github.com/golang-jwt/jwt/v5"
+	// jtoken "github.com/golang-jwt/jwt/v5"
 	"time"
 
 )
-
-var jwtSecretKey = []byte("your-secret-key")
 
 func HashPassword(password string) (string, error) {
     bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
@@ -52,6 +52,13 @@ func Create(c *fiber.Ctx) error {
 }
 
 func GetAll(c *fiber.Ctx) error {
+	// how to get user info from jwt token
+	// user := c.Locals("user").(*jwt.Token)
+	// claims := user.Claims.(jwt.MapClaims)
+	// uid := int(claims["uid"].(float64))
+	// email := claims["email"].(string)
+	// print(uid, ": ",email)
+
 	userModels := &[]models.User{}
 	err := storage.DB.Db.Find(userModels).Error
 	if err != nil {
@@ -81,6 +88,7 @@ func generateToken(user models.User) (string, error) {
 
 	// Create the JWT token with the claims and sign it using the secret key
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	jwtSecretKey := []byte(os.Getenv("JWT_SECRET"))
 	signedToken, err := token.SignedString(jwtSecretKey)
 	if err != nil {
 		return "", err
