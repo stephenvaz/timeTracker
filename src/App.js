@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import Timesheet from './pages/Timesheet';
-import Apply from './pages/Apply';
-import Status from './pages/Status';
-import Attendance from './pages/Attendance';
-import OngoingProject from './pages/OngoingProject';
-import AssignTask from './pages/AssignTask'; // Add this line
+import Home from '../client/src/pages/Home';
+import Timesheet from '../client/src/pages/Timesheet';
+import Apply from '../client/src/pages/Apply';
+import Status from '../client/src/pages/Status';
+import Attendance from '../client/src/pages/Attendance';
+import OngoingProject from '../client/src/pages/OngoingProject';
+import AssignTask from '../client/src/pages/AssignTask'; // Add this line
 
 import './styles.css';
 

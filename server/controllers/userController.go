@@ -45,3 +45,11 @@ func GetAll(c *fiber.Ctx) error {
 	})
 	return nil
 }
+
+func userAuth(c *fiber.Ctx) error {
+	user := models.User{}
+	err := c.BodyParser(&user)
+	if err != nil {
+		
+	}
+}

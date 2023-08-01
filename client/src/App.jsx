@@ -1,86 +1,58 @@
-import { useState, useEffect } from 'react';
-import Tree from 'react-d3-tree';
-import axios from 'axios';
-import './tree.css';
+import React from 'react';
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import Timesheet from './pages/Timesheet';
+import Apply from './pages/Apply';
+import Status from './pages/Status';
+import Attendance from './pages/Attendance';
+import OngoingProject from './pages/OngoingProject';
+import AssignTask from './pages/AssignTask'; // Add this line
+import './App.css';
 
-function App() {
-  const [data, setData] = useState(null);
-  const [treeTranslate, setTreeTranslate] = useState({ x: window.innerWidth/2, y: window.innerHeight/3 });
-
-  useEffect(() => {
-    axios
-      .get('http://127.0.0.1:6969/api/hierarchy/getall')
-      .then((res) => {
-        console.log(res.data);
-        const hierarchyData = formatHierarchyData(res.data);
-        console.log(hierarchyData);
-        setData(hierarchyData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    // Add event listener for window resize
-    window.addEventListener('resize', handleResize);
-
-    // Cleanup the event listener on component unmount
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  const handleResize = () => {
-    // Update the tree translation based on the new window dimensions
-    const newTranslate = {
-      x: window.innerWidth / 2,
-      y: window.innerHeight / 3,
-    };
-    setTreeTranslate(newTranslate);
-  };
-
-  const formatHierarchyData = (apiData) => {
-    const hierarchyMap = {};
-    let root = null;
-
-    apiData.data.forEach((item) => {
-      const { HierarchyID, EmployeeID, SupervisorID, Ename, Sname } = item;
-      hierarchyMap[EmployeeID] = {
-        name: Ename,
-        children: [],
-      };
-    });
-
-    apiData.data.forEach((item) => {
-      const { EmployeeID, SupervisorID } = item;
-      const node = hierarchyMap[EmployeeID];
-      const supervisorNode = hierarchyMap[SupervisorID];
-
-      if (SupervisorID === EmployeeID) {
-        root = node;
-      } else if (supervisorNode) {
-        supervisorNode.children.push(node);
-      }
-    });
-
-    return root;
-  };
-
+const App = () => {
   return (
-    <div id="treeWrapper" style={{ width: '100vw', height: '100vh' }}>
-      {data && (
-        <Tree
-          data={data}
-          orientation="vertical"
-          rootNodeClassName="node__root"
-          branchNodeClassName="node__branch"
-          leafNodeClassName="node__leaf"
-          svgClassName="custom"
-          enableLegacyTransitions={true}
-          translate={treeTranslate}
-        />
-      )}
-    </div>
+    <Router>
+      <nav className="navbar">
+        <div className="navbar-logo">Your App Logo</div>
+        <div className="navbar-links">
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/timesheet">Timesheet</Link>
+            </li>
+            <li>
+              <Link to="/apply">Apply</Link>
+            </li>
+            <li>
+              <Link to="/status">Status</Link>
+            </li>
+            <li>
+              <Link to="/attendance">Attendance</Link>
+            </li>
+            <li>
+              <Link to="/ongoing_proj">Ongoing Project</Link>
+            </li>
+            <li>
+               <Link to="/assign_task">Assign Task</Link> {/* Add this line */}
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/timesheet" element={<Timesheet />} />
+        <Route path="/apply" element={<Apply />} />
+        <Route path="/status" element={<Status />} />
+        <Route path="/attendance" element={<Attendance />} />
+        <Route path="/ongoing_proj" element={<OngoingProject />} />
+        <Route path="/assign_task" element={<AssignTask />} /> {/* Add this line */}
+
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
