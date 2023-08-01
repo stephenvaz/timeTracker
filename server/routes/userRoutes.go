@@ -9,5 +9,5 @@ func UserRoutes(app fiber.Router) {
 	api := app.Group("/users")
 	api.Post("/create", controllers.Create)
 	api.Get("/getall", controllers.GetAll)
-
+	api.Post("/login", controllers.Login)
 }
